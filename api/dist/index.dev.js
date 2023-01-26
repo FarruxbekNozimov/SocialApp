@@ -16,6 +16,8 @@ var authRoute = require("./routes/auth");
 
 var userRoute = require("./routes/users");
 
+var postRoute = require("./routes/post");
+
 dotenv.config(); // middleware
 
 app.use(express.json());
@@ -23,6 +25,7 @@ app.use(helmet());
 app.use(morgan("common"));
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
 
 var startApp = function startApp() {
   try {} catch (error) {}

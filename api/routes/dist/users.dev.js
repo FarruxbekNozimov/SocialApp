@@ -234,5 +234,77 @@ router.put("/:id/follow", function _callee4(req, res) {
   }, null, null, [[1, 19]]);
 }); // -- UNFOLLOW USER
 
-router.get("/", function (req, res) {});
+router.put("/:id/unfollow", function _callee5(req, res) {
+  var user, currentUser;
+  return regeneratorRuntime.async(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          if (!(req.body.userId != req.params.id)) {
+            _context5.next = 23;
+            break;
+          }
+
+          _context5.prev = 1;
+          _context5.next = 4;
+          return regeneratorRuntime.awrap(User.findById(req.params.id));
+
+        case 4:
+          user = _context5.sent;
+          _context5.next = 7;
+          return regeneratorRuntime.awrap(User.findById(req.body.userId));
+
+        case 7:
+          currentUser = _context5.sent;
+
+          if (!user.followers.includes(req.body.userId)) {
+            _context5.next = 16;
+            break;
+          }
+
+          _context5.next = 11;
+          return regeneratorRuntime.awrap(user.updateOne({
+            $pull: {
+              followers: req.body.userId
+            }
+          }));
+
+        case 11:
+          _context5.next = 13;
+          return regeneratorRuntime.awrap(currentUser.updateOne({
+            $pull: {
+              followings: req.params.id
+            }
+          }));
+
+        case 13:
+          res.status(200).json("User has been unfollowed");
+          _context5.next = 17;
+          break;
+
+        case 16:
+          res.status(403).json("You dont follow this user");
+
+        case 17:
+          _context5.next = 21;
+          break;
+
+        case 19:
+          _context5.prev = 19;
+          _context5.t0 = _context5["catch"](1);
+
+        case 21:
+          _context5.next = 24;
+          break;
+
+        case 23:
+          res.status(200).json("You can not unfollow yourself");
+
+        case 24:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[1, 19]]);
+});
 module.exports = router;
