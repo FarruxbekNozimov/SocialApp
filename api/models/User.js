@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
 		profilePicture: { type: String, default: "" },
 		coverPicture: { type: String, default: "" },
 		followers: { type: Array, default: [] },
-		followins: { type: Array, default: [] },
+		followings: { type: Array, default: [] },
 		isAdmin: { type: Boolean, default: false },
 		desc: { type: String, max: 70 },
 		city: { type: String, max: 30 },
