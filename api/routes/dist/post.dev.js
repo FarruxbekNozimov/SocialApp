@@ -10,7 +10,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var router = require("express").Router();
 
-var Post = require("../models/Post"); // PLAN
+var shuffleArray = require("../utils/shuffle");
+
+var Post = require("../models/Post");
+
+var User = require("../models/User"); // PLAN
 // -- CREATE POST
 
 
@@ -199,80 +203,79 @@ router.put("/:id/like", function _callee4(req, res) {
       }
     }
   }, null, null, [[0, 15]]);
-}); // -- GET POST
+}); // -- GET TIMELINE POSTS
 
-router.get("/:id", function _callee5(req, res) {
-  var post;
+router.get("/timeline/all", function _callee5(req, res) {
+  var currentUser, userPosts, friendPosts;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(Post.findById(req.params.id));
-
-        case 3:
-          post = _context5.sent;
-          res.status(200).json(post);
-          _context5.next = 10;
-          break;
-
-        case 7:
-          _context5.prev = 7;
-          _context5.t0 = _context5["catch"](0);
-          res.status(500).json(_context5.t0);
-
-        case 10:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  }, null, null, [[0, 7]]);
-}); // -- GET TIMELINE POSTS
-
-router.get("/timeline", function _callee6(req, res) {
-  var postArray, currentUser, userPosts, friendPosts;
-  return regeneratorRuntime.async(function _callee6$(_context6) {
-    while (1) {
-      switch (_context6.prev = _context6.next) {
-        case 0:
-          postArray = [];
-          _context6.prev = 1;
-          _context6.next = 4;
           return regeneratorRuntime.awrap(User.findById(req.body.userId));
 
-        case 4:
-          currentUser = _context6.sent;
-          _context6.next = 7;
+        case 3:
+          currentUser = _context5.sent;
+          _context5.next = 6;
           return regeneratorRuntime.awrap(Post.find({
             userId: currentUser._id
           }));
 
-        case 7:
-          userPosts = _context6.sent;
-          _context6.next = 10;
+        case 6:
+          userPosts = _context5.sent;
+          _context5.next = 9;
           return regeneratorRuntime.awrap(Promise.all(currentUser.followings.map(function (friendId) {
-            Post.find({
+            return Post.find({
               userId: friendId
             });
           })));
 
-        case 10:
-          friendPosts = _context6.sent;
-          res.json(userPosts.concat.apply(userPosts, _toConsumableArray(friendPosts)));
-          _context6.next = 17;
+        case 9:
+          friendPosts = _context5.sent;
+          res.json(shuffleArray(userPosts.concat.apply(userPosts, _toConsumableArray(friendPosts))));
+          _context5.next = 16;
           break;
 
-        case 14:
-          _context6.prev = 14;
-          _context6.t0 = _context6["catch"](1);
+        case 13:
+          _context5.prev = 13;
+          _context5.t0 = _context5["catch"](0);
+          res.status(500).json(_context5.t0);
+
+        case 16:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+}); // -- GET POST
+
+router.get("/:id", function _callee6(req, res) {
+  var post;
+  return regeneratorRuntime.async(function _callee6$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return regeneratorRuntime.awrap(Post.findById(req.params.id));
+
+        case 3:
+          post = _context6.sent;
+          res.status(200).json(post);
+          _context6.next = 10;
+          break;
+
+        case 7:
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
           res.status(500).json(_context6.t0);
 
-        case 17:
+        case 10:
         case "end":
           return _context6.stop();
       }
     }
-  }, null, null, [[1, 14]]);
+  }, null, null, [[0, 7]]);
 });
 module.exports = router;
