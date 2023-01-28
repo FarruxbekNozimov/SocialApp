@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Post({ post }) {
-	const [like, setLike] = useState(post.like);
+	const [like, setLike] = useState(post.likes.length);
 	const [isLiked, setIsLiked] = useState(false);
 	const [user, setUser] = useState({});
 	const likeHandler = () => {
@@ -37,7 +37,7 @@ export default function Post({ post }) {
 				</div>
 				<div className="postCenter">
 					<span className="postText">{post?.desc}</span>
-					<img className="postImg" src={PF + post?.photo} alt="" />
+					<img className="postImg" src={PF + post?.img} alt="" />
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">
