@@ -205,7 +205,7 @@ router.put("/:id/like", function _callee4(req, res) {
   }, null, null, [[0, 15]]);
 }); // -- GET TIMELINE POSTS
 
-router.get("/timeline/all", function _callee5(req, res) {
+router.get("/timeline/:id", function _callee5(req, res) {
   var currentUser, userPosts, friendPosts;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
@@ -213,7 +213,7 @@ router.get("/timeline/all", function _callee5(req, res) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(User.findById(req.body.userId));
+          return regeneratorRuntime.awrap(User.findById(req.params.id));
 
         case 3:
           currentUser = _context5.sent;
@@ -233,7 +233,7 @@ router.get("/timeline/all", function _callee5(req, res) {
 
         case 9:
           friendPosts = _context5.sent;
-          res.json(shuffleArray(userPosts.concat.apply(userPosts, _toConsumableArray(friendPosts))));
+          res.status(200).json(shuffleArray(userPosts.concat.apply(userPosts, _toConsumableArray(friendPosts))));
           _context5.next = 16;
           break;
 

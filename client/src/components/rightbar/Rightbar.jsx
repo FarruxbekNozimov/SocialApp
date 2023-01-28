@@ -3,6 +3,8 @@ import Online from "../online/Online";
 import { Users } from "../../dummyData";
 
 export default function Sidebar({ profile }) {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
 	const HomeRightbar = () => {
 		return (
 			<div>
@@ -40,7 +42,7 @@ export default function Sidebar({ profile }) {
 					<div className="rightbarFollowing">
 						<img
 							className="rightbarFollowingImg"
-							src="/assets/person/1.png"
+							src={`${PF}/person/1.png`}
 							alt=""
 						/>
 						<span className="rightbarFollowingName">John Carter</span>
@@ -48,7 +50,7 @@ export default function Sidebar({ profile }) {
 					<div className="rightbarFollowing">
 						<img
 							className="rightbarFollowingImg"
-							src="/assets/person/2.png"
+							src={`${PF}/person/2.png`}
 							alt=""
 						/>
 						<span className="rightbarFollowingName">John Carter</span>
@@ -56,7 +58,7 @@ export default function Sidebar({ profile }) {
 					<div className="rightbarFollowing">
 						<img
 							className="rightbarFollowingImg"
-							src="/assets/person/3.png"
+							src={`${PF}/person/3.png`}
 							alt=""
 						/>
 						<span className="rightbarFollowingName">John Carter</span>

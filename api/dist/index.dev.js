@@ -18,8 +18,14 @@ var userRoute = require("./routes/users");
 
 var postRoute = require("./routes/post");
 
+var cors = require("cors");
+
+app.use(cors());
 dotenv.config(); // middleware
 
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));

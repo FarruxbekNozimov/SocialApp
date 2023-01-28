@@ -7,10 +7,13 @@ const morgan = require("morgan");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/post");
+const cors = require("cors");
 
+app.use(cors());
 dotenv.config();
 
 // middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));

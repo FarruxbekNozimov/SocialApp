@@ -6,18 +6,18 @@ Object.defineProperty(exports, "__esModule", {
 exports.Posts = exports.Users = void 0;
 var Users = [{
   id: 1,
-  profilePicture: "assets/person/1.png",
+  profilePicture: "person/1.png",
   username: "Toshmatov Alisher"
 }, {
   id: 2,
-  profilePicture: "assets/person/2.png",
+  profilePicture: "person/2.png",
   username: "Eshmatov G'anisher"
 }];
 exports.Users = Users;
 var Posts = [{
   id: 1,
   desc: "Hello my love , I miss you !",
-  photo: "assets/post/1.png",
+  photo: "post/1.png",
   date: "5 mins ago",
   userId: 1,
   like: 32,
@@ -25,7 +25,7 @@ var Posts = [{
 }, {
   id: 2,
   desc: "What is your name ?",
-  photo: "assets/post/2.png",
+  photo: "post/2.png",
   date: "1 hour ago",
   userId: 2,
   like: 12,
@@ -33,7 +33,7 @@ var Posts = [{
 }, {
   id: 3,
   desc: "What is not my name",
-  photo: "assets/post/3.png",
+  photo: "post/3.png",
   date: "5 hour ago",
   userId: 2,
   like: 17,
