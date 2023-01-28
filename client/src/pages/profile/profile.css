@@ -8,6 +8,8 @@
 }
 
 .profileCover {
+  width: 95%;
+  margin: 20px auto;
   height: 320px;
   position: relative;
 }
@@ -16,6 +18,8 @@
   width: 100%;
   height: 250px;
   object-fit: cover;
+  border-radius: 20px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .profileUserImg {
@@ -44,9 +48,10 @@
 
 .profileInfoDesc {
   font-weight: 300;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .profileRightBottom {
   display: flex;
 }
-

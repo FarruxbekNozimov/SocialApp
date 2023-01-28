@@ -72,6 +72,14 @@
   margin-bottom: 20px;
 }
 
+.loginButton:focus, .loginRegisterButton:focus {
+  outline: none;
+}
+
+.loginButton:disabled, .loginRegisterButton:disabled {
+  cursor: not-allowed;
+}
+
 .loginForgot {
   text-align: center;
   color: #1775ee;
