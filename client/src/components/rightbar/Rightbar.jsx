@@ -18,43 +18,61 @@ export default function Sidebar({ profile }) {
 		);
 	};
 	const ProfileRightbar = () => {
-		return (<>
-			<h4 className="rightbarTitle">User information</h4>
-			<div className="rightbarInfo">
-				<div className="rightbarInfoItem">
-					<span className="rightbarInfoKey">City </span>
-					<span className="rightbarInfoValue">Tashkent </span>
+		return (
+			<>
+				<h4 className="rightbarTitle">User information</h4>
+				<div className="rightbarInfo">
+					<div className="rightbarInfoItem">
+						<span className="rightbarInfoKey">City </span>
+						<span className="rightbarInfoValue">Tashkent </span>
+					</div>
+					<div className="rightbarInfoItem">
+						<span className="rightbarInfoKey">From </span>
+						<span className="rightbarInfoValue">Uzbekistan </span>
+					</div>
+					<div className="rightbarInfoItem">
+						<span className="rightbarInfoKey">Phone </span>
+						<span className="rightbarInfoValue">+99812398 </span>
+					</div>
 				</div>
-				<div className="rightbarInfoItem">
-					<span className="rightbarInfoKey">From </span>
-					<span className="rightbarInfoValue">Uzbekistan </span>
+				<h4 className="rightbarTitle">User Friends</h4>
+				<div className="rightbarFollowings">
+					<div className="rightbarFollowing">
+						<img
+							className="rightbarFollowingImg"
+							src="/assets/person/1.png"
+							alt=""
+						/>
+						<span className="rightbarFollowingName">John Carter</span>
+					</div>
+					<div className="rightbarFollowing">
+						<img
+							className="rightbarFollowingImg"
+							src="/assets/person/2.png"
+							alt=""
+						/>
+						<span className="rightbarFollowingName">John Carter</span>
+					</div>
+					<div className="rightbarFollowing">
+						<img
+							className="rightbarFollowingImg"
+							src="/assets/person/3.png"
+							alt=""
+						/>
+						<span className="rightbarFollowingName">John Carter</span>
+					</div>
 				</div>
-				<div className="rightbarInfoItem">
-					<span className="rightbarInfoKey">Phone </span>
-					<span className="rightbarInfoValue">+99812398 </span>
-				</div>
-			</div>
-			<h4 className="rightbarTitle">User Friends</h4>
-			<div className="rightbarFollowings">
-				<div className="rightbarFollowing">
-					<img className="rightbarFollowingImg" src="/assets/person/1.png" alt="" />
-					<span className="rightbarFollowingName">John Carter</span>
-				</div>
-				<div className="rightbarFollowing">
-					<img className="rightbarFollowingImg" src="/assets/person/2.png" alt="" />
-					<span className="rightbarFollowingName">John Carter</span>
-				</div>
-				<div className="rightbarFollowing">
-					<img className="rightbarFollowingImg" src="/assets/person/3.png" alt="" />
-					<span className="rightbarFollowingName">John Carter</span>
-				</div>
-			</div>
-		</>);
+			</>
+		);
 	};
 	return (
 		<div className="rightbar">
 			<div className="rightbarWrapper">
-				<ProfileRightbar></ProfileRightbar>
+				{profile ? (
+					<ProfileRightbar></ProfileRightbar>
+				) : (
+					<HomeRightbar></HomeRightbar>
+				)}
 			</div>
 		</div>
 	);

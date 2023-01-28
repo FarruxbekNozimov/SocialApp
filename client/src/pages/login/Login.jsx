@@ -16,8 +16,9 @@ export default function Login() {
 						<input placeholder="Parol" className="loginInput" />
 						<button className="loginButton">Kirish </button>
 						<span className="loginForgot">Parolni unutdingizmi ?</span>
+						<hr className="loginHr" />
 						<button className="loginRegisterButton">
-							Create a New Account
+							Yangi akkaunt ochish
 						</button>
 					</div>
 				</div>
