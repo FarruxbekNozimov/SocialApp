@@ -36,6 +36,8 @@
 
 .postDate {
   font-size: 12px;
+  font-weight: normal;
+  color: rgb(65, 65, 65);
 }
 
 .postCenter {

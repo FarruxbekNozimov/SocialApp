@@ -4,9 +4,6 @@
   font-family: 'Roboto', sans-serif;
 }
 
-body {
-  overflow-y: hidden;
-}
 
 ::-webkit-scrollbar {
   width: 5px;
