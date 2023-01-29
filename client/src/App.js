@@ -13,10 +13,10 @@ import { AuthContext } from './context/AuthContext'
 
 function App () {
   const { user } = useContext(AuthContext)
-  console.log('User', user)
   return (
     <Router>
       <Switch>
+        <Route path='/profile/:username' component={Profile}></Route>
         {user ? (
           <Route exact path='/' component={Home}></Route>
         ) : (
@@ -32,11 +32,6 @@ function App () {
         ) : (
           <Route exact path='/register' component={Register}></Route>
         )}
-        <Route
-          exact
-          path='/profile/:username'
-          component={user ? Register : Profile}
-        ></Route>
       </Switch>
     </Router>
   )

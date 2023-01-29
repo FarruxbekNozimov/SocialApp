@@ -5,3 +5,10 @@
 .feedWrapper {
   padding: 20px;
 }
+
+.noPosts {
+  text-align: center;
+  color: #777;
+  user-select: none;
+  cursor: auto;
+}

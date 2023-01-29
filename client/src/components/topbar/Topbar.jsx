@@ -44,11 +44,12 @@ export default function Topbar () {
             <span className='topbarIconBadge'>1</span>
           </div>
         </div>
-        <Link to={`/profile/${user.username}`}>
+        <Link to={`profile/${user.username}`}>
           <img
             src={
-              PF +
-              (user.profilePicture ? user.profilePicture : 'person/user.png')
+              user.profilePicture
+                ? PF + user.profilePicture
+                : PF + 'person/user.png'
             }
             alt=''
             className='topbarImg'

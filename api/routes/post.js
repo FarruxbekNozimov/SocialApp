@@ -22,7 +22,6 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
-    console.log(post)
     if (post.userId == req.body.userId) {
       await post.updateOne({ $set: req.body })
       res.status(200).json('Post has been updated')
@@ -88,7 +87,6 @@ router.get('/timeline/:id', async (req, res) => {
 
 router.get('/profile/:username', async (req, res) => {
   try {
-    console.log(req.params.username)
     const user = await User.findOne({ username: req.params.username })
     const posts = await Post.find({ userId: user._id })
     res.status(200).json(posts)
