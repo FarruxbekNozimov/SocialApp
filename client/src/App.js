@@ -10,13 +10,18 @@ import Login from './pages/login/Login'
 import Register from './pages/register/Register'
 import Profile from './pages/profile/Profile'
 import { AuthContext } from './context/AuthContext'
+import Messenger from './pages/messenger/Messenger'
 
 function App () {
   const { user } = useContext(AuthContext)
   return (
     <Router>
       <Switch>
-        <Route path='/profile/:username' component={Profile}></Route>
+        {user ? (
+          <Route exact path='/messenger' component={Messenger}></Route>
+        ) : (
+          <Redirect to='/login'></Redirect>
+        )}
         {user ? (
           <Route exact path='/' component={Home}></Route>
         ) : (
@@ -32,6 +37,7 @@ function App () {
         ) : (
           <Route exact path='/register' component={Register}></Route>
         )}
+        <Route path='/profile/:username' component={Profile}></Route>
       </Switch>
     </Router>
   )
