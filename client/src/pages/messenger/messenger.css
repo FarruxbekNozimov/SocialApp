@@ -94,6 +94,11 @@
   resize: none;
 }
 
+.dark-version .chatMessageInput {
+  background: var(--darkRightBgColor);
+  color: var(--darkColorPost);
+}
+
 .chatMessageInput:focus {
   outline: none;
 }
@@ -105,8 +110,16 @@
   margin-left: 5px;
   border-radius: 20px;
   cursor: pointer;
-  background-color: chocolate;
   color: blue;
+  transition: 1s;
+}
+
+.dark-version .chatSubmitButton {
+  background-color: var(--darkBorderShadow);
+}
+
+.dark-version .chatSubmitButton:hover {
+  background-color: var(--lightListOutlineColor);
 }
 
 .chatOnline {
@@ -151,4 +164,25 @@
   text-align: center;
   border: 1px solid #999;
   width: 60%;
+}
+
+.emojiButton {
+  position: absolute;
+  right: 17%;
+  background: none;
+  border: none;
+  font-size: 30px !important;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.chatSubmitButtonIcon, .emojiButtonIcon {
+  color: var(--lightMainColor);
+  font-size: 35px !important;
+  cursor: pointer;
+}
+
+.dark-version .chatSubmitButtonIcon, .dark-version .emojiButtonIcon {
+  color: var(--darkMainColor);
 }

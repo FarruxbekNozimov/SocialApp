@@ -1,9 +1,8 @@
 import "./rightbar.css";
 import Online from "../online/Online";
 import { Users } from "../../dummyData";
-import { useContext, useEffect, useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
 
@@ -12,16 +11,10 @@ export default function Rightbar({ user }) {
 	const [friends, setFriends] = useState([]);
 	const [followers, setFollowers] = useState([]);
 	const { user: currentUser, dispatch } = useContext(AuthContext);
-	const [followed, setFollowed] = useState(
-		currentUser.followings.includes(user?._id)
-	);
-
-	console.log(
-		currentUser.followings,
-		currentUser.followings.includes(user?._id),
-		user?._id,
-		followed
-	);
+	// const [followed, setFollowed] = useState(
+	// 	currentUser.followings.includes(user?._id)
+	// );
+	let followed = currentUser.followings.includes(user?._id);
 
 	useEffect(() => {
 		const getFriends = async () => {
@@ -35,9 +28,10 @@ export default function Rightbar({ user }) {
 			}
 		};
 		getFriends();
-	}, [user]);
+	}, [user, followers, friends]);
 
 	const handleClick = async () => {
+		console.log(followed, currentUser.followings, currentUser._id);
 		try {
 			if (followed) {
 				await axios.put(`/users/${user._id}/unfollow`, {
@@ -48,27 +42,27 @@ export default function Rightbar({ user }) {
 				await axios.put(`/users/${user._id}/follow`, {
 					userId: currentUser._id,
 				});
-				console.log(user.followers, user.followings, currentUser._id);
-				if (
-					user.followers.includes(currentUser._id) &&
-					user.followings.includes(currentUser._id)
-				) {
-					let result = await axios.post("/conversations", {
-						senderId: currentUser._id,
-						receiverId: user._id,
-					});
-					console.log(result);
-				}
 				dispatch({ type: "FOLLOW", payload: user._id });
 			}
-			console.log(followed);
-			setFollowed(!followed);
+			followed = !followed;
 			console.log(followed);
 		} catch (err) {
 			console.log(err);
 		}
+		try {
+			console.log(user.followers, user.followings, currentUser._id);
+			if (
+				user.followers.includes(currentUser._id) &&
+				user.followings.includes(currentUser._id)
+			) {
+				let result = await axios.post("/conversations", {
+					senderId: currentUser._id,
+					receiverId: user._id,
+				});
+				console.log(result);
+			}
+		} catch (error) {}
 	};
-	console.log(friends, followers);
 	const HomeRightbar = () => {
 		return (
 			<div>

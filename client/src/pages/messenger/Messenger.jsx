@@ -1,6 +1,4 @@
 import "./messenger.css";
-import Topbar from "../../components/topbar/Topbar";
-import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import {
@@ -78,10 +76,10 @@ export default function Messenger() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (e.keyCode == 13 && e.ctrlKey) {
+		if (newMessage.trim()) {
 			const message = {
 				sender: user._id,
-				text: newMessage,
+				text: newMessage.trim(),
 				conversationId: currentChat._id,
 			};
 			const receiverId = currentChat.members.find((m) => m != user._id);
@@ -125,16 +123,19 @@ export default function Messenger() {
 									</div>
 									<div className="chatBoxBottom">
 										<textarea
-											onKeyDown={handleSubmit}
+											// onKeyDown={handleSubmit}
 											className="chatMessageInput"
 											name="Bu yerga yozing..."
-											onChange={(e) => setNewMessage(e.target.value)}
-											value={newMessage}></textarea>
-										<button className="emojiButtpn">
-											<SentimentSatisfiedRounded></SentimentSatisfiedRounded>
+											value={newMessage}
+											onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
+											onChange={(e) =>
+												setNewMessage(e.target.value)
+											}></textarea>
+										<button className="emojiButton">
+											<SentimentSatisfiedRounded className="emojiButtonIcon"></SentimentSatisfiedRounded>
 										</button>
 										<button className="chatSubmitButton" onClick={handleSubmit}>
-											<SendRounded size="50px"></SendRounded>
+											<SendRounded className="chatSubmitButtonIcon"></SendRounded>
 										</button>
 									</div>
 								</div>

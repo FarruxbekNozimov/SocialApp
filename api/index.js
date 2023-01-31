@@ -15,9 +15,7 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
-const sharp = require("sharp");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const { Readable } = require("stream");
 
 app.use(cors());
 dotenv.config();
@@ -35,43 +33,22 @@ cloudinary.config({
 	api_secret: "5qmb7zfL0PmoHz9qZ3ANya4VbVU",
 });
 
-// const storage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: 'media'
-//   }
-// })
-const storage = multer.memoryStorage();
+const storage = new CloudinaryStorage({
+	cloudinary: cloudinary,
+	params: {
+		folder: "media",
+	},
+});
 
-const upload = multer({ storage: storage });
-
-const bufferToStream = (buffer) => {
-	const readable = new Readable({
-		read() {
-			this.push(buffer);
-			this.push(null);
-		},
-	});
-	return readable;
-};
+const upload = multer({ storage });
 
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-	console.log(req.file, req.body, req.files);
-	// const data = await sharp(req.file.buffer).toBuffer();
-	// const stream = cloudinary.uploader.upload_stream(
-	// 	{ folder: "media" },
-	// 	(error, result) => {
-	// 		if (error) return console.error(error);
-	// 	}
-	// );
-	// bufferToStream(data).pipe(stream);
-
-	// try {
-	// 	return req.file.path;
-	// } catch (err) {
-	// 	console.log("error", err);
-	// 	return res.status(200).json(err);
-	// }
+	try {
+		return res.status(200).json(req.file.path);
+	} catch (err) {
+		console.log("error", err);
+		return res.status(200).json(err);
+	}
 });
 
 app.use("/api/auth", authRoute);

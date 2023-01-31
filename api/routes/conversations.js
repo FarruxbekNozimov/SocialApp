@@ -3,12 +3,17 @@ const Conversation = require("../models/Conversations");
 
 // PLAN
 
-//  -- NEW CONVERSATION
+//  -- CREATE NEW CONVERSATION
 
 router.post("/", async (req, res) => {
-	console.log(req.body)
+	const { senderId, receiverId } = req.body;
+	let conversations = await Conversation.find();
+	for (let c in conversations) {
+		if (c.members.includes(senderId) && c.members.includes(receiverId))
+			return res.status(400).json("This conversation is already exists");
+	}
 	const newConversation = new Conversation({
-		members: [req.body.senderId, req.body.receiverId],
+		members: [senderId, receiverId],
 	});
 
 	try {

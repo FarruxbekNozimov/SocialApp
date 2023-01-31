@@ -13,7 +13,6 @@
   color: var(--darkColorPost);
 }
 
-
 .rightbarTitle {
   font-size: 18px;
   font-weight: 500;
@@ -116,4 +115,10 @@
 
 .rightbarFollowButton:focus {
   outline: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .rightbar{
+    flex:2;
+  }
 }

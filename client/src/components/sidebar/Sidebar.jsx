@@ -10,8 +10,7 @@ import {
 	LightModeRounded,
 	FontDownloadRounded,
 } from "@mui/icons-material";
-import { a } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 // import CloseFriend from "../closeFriend/CloseFriend";
 
@@ -41,10 +40,12 @@ export default function Sidebar() {
 							<span className="sidebarListItemText">Bosh sahifa</span>
 						</li>
 					</a>
-					<li className="sidebarListItem">
-						<Explore className="sidebarIcon"></Explore>
-						<span className="sidebarListItemText">Boshqalar</span>
-					</li>
+					<a href="/explore" className="sidebarLink">
+						<li className="sidebarListItem">
+							<Explore className="sidebarIcon"></Explore>
+							<span className="sidebarListItemText">Boshqalar</span>
+						</li>
+					</a>
 					<a href="/messanger" className="sidebarLink">
 						<li className="sidebarListItem sidebarListItemBadge">
 							<MessageRounded className="sidebarIcon"></MessageRounded>
