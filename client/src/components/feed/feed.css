@@ -1,9 +1,12 @@
 .feed {
   flex: 5;
+  /* width: 800px; */
 }
 
 .feedWrapper {
   padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .noPosts {

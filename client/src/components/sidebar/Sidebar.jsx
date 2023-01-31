@@ -1,53 +1,87 @@
 import "./sidebar.css";
-import { Explore, PlayCircleFilled } from "@mui/icons-material";
-import MessageRoundedIcon from "@mui/icons-material/MessageRounded";
-import CabinRoundedIcon from "@mui/icons-material/CabinRounded";
-import CircleNotificationsRoundedIcon from "@mui/icons-material/CircleNotificationsRounded";
-import Person4RoundedIcon from "@mui/icons-material/Person4Rounded";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { Users } from "../../dummyData";
-import CloseFriend from "../closeFriend/CloseFriend";
+import {
+	Person4Rounded,
+	CabinRounded,
+	CircleNotificationsRounded,
+	MessageRounded,
+	Explore,
+	AddAPhotoRounded,
+	DarkModeRounded,
+	LightModeRounded,
+	FontDownloadRounded,
+} from "@mui/icons-material";
+import { a } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+// import CloseFriend from "../closeFriend/CloseFriend";
 
 export default function Sidebar() {
+	let theme = localStorage.getItem("theme") || "dark-version";
+	const { user } = useContext(AuthContext);
+
+	const changeTheme = () => {
+		if (theme == "dark-version") {
+			localStorage.setItem("theme", "light-version");
+		} else {
+			localStorage.setItem("theme", "dark-version");
+		}
+		window.location.reload();
+	};
 	return (
 		<div className="sidebar">
 			<div className="sidebarWrapper">
+				<a className="sidebarLink" href="/">
+					<span className="sidebarLogo sidebarnotResponsiveLogo">Yuzkitob</span>
+					<span className="sidebarLogo sidebarResponsiveLogo">Yk</span>
+				</a>
 				<ul className="sidebarList">
-					<li className="sidebarListItem">
-						<CabinRoundedIcon className="sidebarIcon"></CabinRoundedIcon>
-						<span className="sidebarListItemText">Home</span>
-					</li>
+					<a href="/" className="sidebarLink">
+						<li className="sidebarListItem">
+							<CabinRounded className="sidebarIcon"></CabinRounded>
+							<span className="sidebarListItemText">Bosh sahifa</span>
+						</li>
+					</a>
 					<li className="sidebarListItem">
 						<Explore className="sidebarIcon"></Explore>
-						<span className="sidebarListItemText">Explore</span>
+						<span className="sidebarListItemText">Boshqalar</span>
+					</li>
+					<a href="/messanger" className="sidebarLink">
+						<li className="sidebarListItem sidebarListItemBadge">
+							<MessageRounded className="sidebarIcon"></MessageRounded>
+							<span className="sidebarListItemText">Yozishmalar</span>
+							<span className="sidebarNotificationBadge">0</span>
+						</li>
+					</a>
+					<li className="sidebarListItem sidebarListItemBadge">
+						<CircleNotificationsRounded className="sidebarIcon"></CircleNotificationsRounded>
+						<span className="sidebarListItemText">Bildirishnoma</span>
+						<span className="sidebarNotificationBadge">0</span>
 					</li>
 					<li className="sidebarListItem">
-						<PlayCircleFilled className="sidebarIcon"></PlayCircleFilled>
-						<span className="sidebarListItemText">Videos</span>
+						<AddAPhotoRounded className="sidebarIcon"></AddAPhotoRounded>
+						<span className="sidebarListItemText">Post qo'shish</span>
 					</li>
-					<li className="sidebarListItem">
-						<MessageRoundedIcon className="sidebarIcon"></MessageRoundedIcon>
-						<span className="sidebarListItemText">Messages</span>
-					</li>
-					<li className="sidebarListItem">
-						<CircleNotificationsRoundedIcon className="sidebarIcon"></CircleNotificationsRoundedIcon>
-						<span className="sidebarListItemText">Messages</span>
-					</li>
-					<li className="sidebarListItem">
-						<Person4RoundedIcon className="sidebarIcon"></Person4RoundedIcon>
-						<span className="sidebarListItemText">Profile</span>
-					</li>
-					<li className="sidebarListItem">
-						<MenuRoundedIcon className="sidebarIcon"></MenuRoundedIcon>
-						<span className="sidebarListItemText">More</span>
-					</li>
-				</ul>
-				<h4>Your Friends</h4>
-				<hr className="sidebarHr" />
-				<ul className="sidebarFriendList">
-					{Users.map((u) => (
-						<CloseFriend key={u.id} user={u}></CloseFriend>
-					))}
+					<a className="sidebarLink" href={`/profile/${user.username}`}>
+						<li className="sidebarListItem">
+							<Person4Rounded className="sidebarIcon"></Person4Rounded>
+							<span className="sidebarListItemText">Sozlamalar</span>
+						</li>
+					</a>
+					<a onClick={changeTheme} className="sidebarLink">
+						<li className="sidebarListItem">
+							{theme == "dark-version" ? (
+								<>
+									<LightModeRounded className="sidebarIcon"></LightModeRounded>
+									<span className="sidebarListItemText">Light</span>
+								</>
+							) : (
+								<>
+									<DarkModeRounded className="sidebarIcon"></DarkModeRounded>
+									<span className="sidebarListItemText">Dark</span>
+								</>
+							)}
+						</li>
+					</a>
 				</ul>
 			</div>
 		</div>

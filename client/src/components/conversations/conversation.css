@@ -33,5 +33,7 @@
 
 .conversationDescMessage {
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 14px;
+  display: block;
+  color: #fff555;
 }

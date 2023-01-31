@@ -1,7 +1,22 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Cascadia Code', sans-serif;
+}
+
+:root {
+  --lightMainColor: #002d3b;
+  --darkMainColor: #00bfff;
+  --darkBorderShadow: rgba(0, 191, 255, 0.3);
+  --lightBorderShadow: rgba(0, 0, 0, 0.3);
+  --darkListOutlineColor: rgb(0, 191, 255, 0.3);
+  --lightListOutlineColor: rgba(0, 43, 58);
+  --darkBgColor: #111;
+  --lightBgColor: #00bfff;
+  --darkBgListItemColor: #000;
+  --lightBgListItemColor: #a3e8ff;
+  --darkColorPost: #ccc;
+  --darkRightBgColor: #222;
 }
 
 
@@ -10,11 +25,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f2f2f2;
   border-radius: 50px;
+  background: var(--darkMainColor);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(31, 135, 255);
+  background-color: var(--lightMainColor);
   border-radius: 50px;
 }

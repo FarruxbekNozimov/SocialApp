@@ -1,10 +1,17 @@
 .profile {
+  flex: 1;
   display: flex;
-  margin-top: 70px;
+  height: 100vh;
+}
+
+.profile.dark-version {
+  background: var(--darkRightBgColor);
+  color: #fff;
 }
 
 .profileRight {
-  flex: 9;
+  overflow-y: scroll;
+  width: calc(100% - 300px);
 }
 
 .profileCover {
@@ -27,12 +34,21 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid white;
+}
+
+.uploadProfilePicCont {
   position: absolute;
   left: 0;
   right: 0;
   margin: auto;
   top: 150px;
-  border: 3px solid white;
+  text-align: center;
+}
+
+.dark-version .profileUserImg {
+  border: 3px solid var(--darkRightBgColor);
+  background: var(--darkRightBgColor);
 }
 
 .profileInfo {
@@ -54,4 +70,50 @@
 
 .profileRightBottom {
   display: flex;
+}
+
+.uploadCoverPic {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 3px 5px;
+  background: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+  transition: 1s;
+  cursor: pointer;
+}
+
+.uploadCoverPic:hover {
+  color: rgb(255, 255, 255);
+}
+
+.uploadProfilePic {
+  position: absolute;
+  left: 42%;
+  bottom: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  color: black;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.uploadCoverPicButton {
+  font-size: 35px !important;
+  cursor: pointer;
+}
+
+.uploadProfilePicButton {
+  font-size: 25px !important;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+  .profileRight {
+    width: calc(100% - 100px);
+  }
 }

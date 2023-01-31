@@ -1,10 +1,18 @@
 .share {
-  width: 100%;
+  width: 90%;
   margin: auto;
-  border-radius: 10px;
-  -webkit-box-shadow: 1px 1px 32px -10px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 1px 1px 32px -10px rgba(0, 0, 0, 1);
-  box-shadow: 1px 1px 32px -10px rgba(0, 0, 0, 1);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 2px solid var(--darkListOutlineColor);
+  box-shadow: 1px 5px 15px 0px black;
+  background: rgb(255, 255, 255);
+}
+
+.dark-version .share {
+  background: var(--darkBgColor);
+  box-shadow: 1px 5px 15px 0px var(--darkMainColor);
+  border: 1px solid var(--darkListOutlineColor);
+  color: var(--darkColorPost);
 }
 
 .shareWrapper {
@@ -28,6 +36,15 @@
   font-size: 17px;
   border: none;
   width: 80%;
+  background: none;
+}
+
+.dark-version .shareInput {
+  color: #fff;
+}
+
+.shareInput::placeholder {
+  color: #999;
 }
 
 .shareInput:focus {
@@ -71,13 +88,16 @@
   cursor: pointer;
   color: #fff;
   transition: 1s;
+}
 
+.shareButton:focus {
+  outline: none;
 }
 
 .shareButton {
   --c: #fff;
   background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%) var(--_p, 100%)/300% no-repeat,
-    #004dff;
+    var(--lightMainColor);
   color: #0000;
   border: none;
   transform: perspective(500px) rotateY(calc(20deg*var(--_i, -1)));
@@ -85,6 +105,12 @@
     calc(var(--_i, -1)*-0.08em) .01em 2px #0004;
   outline-offset: .1em;
   transition: 0.3s;
+}
+
+.dark-version .shareButton {
+  background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%) var(--_p, 100%)/300% no-repeat,
+    var(--darkMainColor);
+
 }
 
 .shareButton:hover,
@@ -116,13 +142,16 @@
 .shareImg {
   width: 100%;
   object-fit: cover;
+  margin-top: 10px;
+  border-radius: 0px;
 }
 
 .shareCancelImg {
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 20px;
   cursor: pointer;
   opacity: 0.7;
   font-size: 30px !important;
+  color: #fff;
 }

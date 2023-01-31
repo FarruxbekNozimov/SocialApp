@@ -4,11 +4,12 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import "./home.css";
 
+let theme = localStorage.getItem("theme") || "dark-version";
+
 export default function Home() {
 	return (
 		<div>
-			<Topbar></Topbar>
-			<div className="home">
+			<div className={`home ${theme}`}>
 				<Sidebar></Sidebar>
 				<Feed></Feed>
 				<Rightbar></Rightbar>

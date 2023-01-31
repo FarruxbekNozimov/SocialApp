@@ -83,7 +83,7 @@ box-shadow: 1px 1px 5px 2px rgba(23,117,238,0.75);
 }
 
 .loginRegisterButton {
-  width: 60%;
+  width: 100%;
   align-self: center;
   height: 50px;
   border-radius: 10px;
