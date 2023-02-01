@@ -5,7 +5,6 @@ import { AuthContext } from "../../context/AuthContext";
 import { useRef } from "react";
 import { useState } from "react";
 import axios from "axios";
-import DragDrop from "../dragDrop/DragDrop";
 
 export default function Share() {
 	const { user } = useContext(AuthContext);
@@ -58,7 +57,6 @@ export default function Share() {
 						ref={desc}
 					/>
 				</div>
-				<DragDrop></DragDrop>
 				{file && (
 					<div className="shareImgContainer">
 						<img

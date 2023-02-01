@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid rgb(128, 128, 128);
+  border-bottom: 2px solid rgb(128, 128, 128);
   margin-bottom: 20px;
 }
 
@@ -92,10 +92,10 @@
   border-radius: 20px;
   font-size: 18px;
   resize: none;
-  background-color: var(--lightBgListItemColor);
   padding-left: 50px;
   padding-right: 60px;
   vertical-align: middle;
+  background-color: var(--lightBgListItemColor);
 }
 
 .dark-version .chatMessageInput {
@@ -120,7 +120,8 @@
 }
 
 .dark-version .chatSubmitButton {
-  background-color: var(--darkRightBgColor);
+  background-color: var(--darkListOutlineColor);
+  border: 1px solid rgba(255, 255, 255, 0.473);
 }
 
 .dark-version .chatSubmitButton:hover {
@@ -171,15 +172,14 @@
   width: 60%;
 }
 
-.emojiButton {
+.emojisButtonContainer {
   position: absolute;
-  right: 17%;
-  background: none;
-  border: none;
-  font-size: 30px !important;
+  right: 100px;
+  top: 5px;
   display: flex;
   text-align: center;
   align-items: center;
+  background: #000;
 }
 
 .mediaButton {

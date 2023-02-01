@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { io } from "socket.io-client";
+import Emojis from "../../components/emojis/Emojis";
 
 export default function Messenger() {
 	let theme = localStorage.getItem("theme") || "dark-version";
@@ -132,12 +133,14 @@ export default function Messenger() {
 											name="Bu yerga yozing..."
 											value={newMessage}
 											onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
-											onChange={(e) =>
-												setNewMessage(e.target.value)
-											}></textarea>
-										<button className="emojiButton">
-											<SentimentSatisfiedRounded className="emojiButtonIcon"></SentimentSatisfiedRounded>
-										</button>
+											onChange={(e) => setNewMessage(e.target.value)}
+											id="textAreaChat"></textarea>
+										<div className="emojisButtonContainer">
+											<Emojis
+												target={document.getElementById(
+													"textAreaChat"
+												)}></Emojis>
+										</div>
 										<button className="chatSubmitButton" onClick={handleSubmit}>
 											<SendRounded className="chatSubmitButtonIcon"></SendRounded>
 										</button>

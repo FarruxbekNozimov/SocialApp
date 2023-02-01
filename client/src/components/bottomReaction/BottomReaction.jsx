@@ -19,15 +19,15 @@ export default function BottomReaction({ target, chat }) {
 	const reactions = ["drink", "cake", "like", "vomit", "angry", "cry", "heart"];
 	const showChangedReaction = (e) => {
 		// if (chat) {
-			let id = e.target.id.slice(0, -2);
-			let button = document.getElementById(`${id}Btn`);
-			for (let i in reactions) {
-				let reaction = button.children[i].children[0];
-				if (e.target.src == reaction.src) {
-					reaction.parentElement.style.display =
-						reaction.parentElement.style.display === "flex" ? "none" : "flex";
-				}
+		let id = e.target.id.slice(0, -2);
+		let button = document.getElementById(`${id}Btn`);
+		for (let i in reactions) {
+			let reaction = button.children[i].children[0];
+			if (e.target.src == reaction.src) {
+				reaction.parentElement.style.display =
+					reaction.parentElement.style.display === "flex" ? "none" : "flex";
 			}
+		}
 		// }
 	};
 	const handleReaction = (x) => {
