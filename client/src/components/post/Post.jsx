@@ -1,15 +1,15 @@
 import "./post.css";
-import { MoreVert } from "@mui/icons-material";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { red } from "@mui/material/colors";
+import { MoreVert } from "@mui/icons-material";
+import WatchLaterRoundedIcon from "@mui/icons-material/WatchLaterRounded";
+import BottomReaction from "../bottomReaction/BottomReaction";
 
 export default function Post({ post }) {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [like, setLike] = useState(post.likes.length);
 	const [isLiked, setIsLiked] = useState(false);
 	const [user, setUser] = useState({});
@@ -37,9 +37,8 @@ export default function Post({ post }) {
 		fetchUser();
 	}, [post.userId]);
 
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	return (
-		<div className="post">
+		<div className="post" id={post._id}>
 			<div className="postWrapper">
 				<div className="postTop">
 					<div className="postTopLeft">
@@ -56,11 +55,15 @@ export default function Post({ post }) {
 						</Link>
 						<span className="postUsername">
 							{user.username}
-							<br /> <span className="postDate">{format(post.createdAt)}</span>
+							<br />{" "}
+							<span className="postDate">
+								<WatchLaterRoundedIcon className="postDateIcon"></WatchLaterRoundedIcon>
+								{format(post.createdAt)}
+							</span>
 						</span>
 					</div>
 					<div className="postTopRight">
-						<MoreVert></MoreVert>
+						<MoreVert className=""></MoreVert>
 					</div>
 				</div>
 				<div className="postCenter">
@@ -68,21 +71,9 @@ export default function Post({ post }) {
 					<img className="postImg" src={post?.img} alt="" />
 				</div>
 				<div className="postBottom">
-					<div className="postBottomLeft">
-						{!isLiked ? (
-							<FavoriteBorderRoundedIcon
-								onClick={likeHandler}
-								className="reactIcon"></FavoriteBorderRoundedIcon>
-						) : (
-							<FavoriteRoundedIcon
-								onClick={likeHandler}
-								className="reactIcon"
-								style={{ color: "#ff1100" }}></FavoriteRoundedIcon>
-						)}
-						<span className="postLikeCounter">{like} likes</span>
-					</div>
+					<BottomReaction target={post._id}></BottomReaction>
 					<div className="postBottomRight">
-						<span className="postCommentText">{post.comments} comments</span>
+						<span className="postCommentText">111{post.comments} comments</span>
 					</div>
 				</div>
 			</div>

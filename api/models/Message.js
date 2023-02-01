@@ -11,6 +11,17 @@ const MessageSchema = new mongoose.Schema(
 		text: {
 			type: String,
 		},
+		isImg: {
+			type: Boolean,
+			default: false,
+		},
+		replyTo: {
+			type: String,
+			default: null,
+		},
+		like: {
+			type: Number,
+		},
 	},
 	{ timestamps: true }
 );

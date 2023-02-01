@@ -44,9 +44,17 @@
 }
 
 .postDate {
+  display: flex;
+  text-align: center;
+  align-items: center;
   font-size: 12px;
   font-weight: normal;
   color: rgb(65, 65, 65);
+}
+
+.postDateIcon {
+  font-size: 15px !important;
+  margin-right: 5px;
 }
 
 .dark-version .postDate {
@@ -70,29 +78,62 @@
 .postBottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .postBottomLeft {
+  width: 70%;
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
 }
 
+.postReactionButton {
+  display: flex;
+  align-items: center;
+  padding: 2px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  padding-right: 10px;
+  margin-right: 7px;
+  border: 1px solid white;
+  margin-bottom: 5px;
+  color: var(--darkColorPost);
+  background: rgba(0, 4, 66, 0.795);
+}
+
+.selectedReaction {
+  background: rgb(0, 17, 255) !important;
+}
+
+.dark-version .selectedReaction {
+  background: rgb(0, 4, 59);
+}
+
 .reactIcon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px !important;
   object-fit: cover;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 2px;
+  border: none;
+  background: none;
 }
 
 .postLikeCounter {
-  font-size: 15px;
+  font-size: 17px;
   margin: 0;
   padding: 0;
 }
 
+.postBottomRight {
+  height: 100%;
+  flex: 1;
+  text-align: right;
+}
+
 .postCommentText {
+  flex: 1;
   cursor: pointer;
   border-bottom: 1px dashed gray;
   font-size: 15px;

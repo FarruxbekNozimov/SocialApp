@@ -90,13 +90,17 @@
   height: 50px;
   padding: 10px;
   border-radius: 20px;
-  font-size: 17px;
+  font-size: 18px;
   resize: none;
+  background-color: var(--lightBgListItemColor);
+  padding-left: 50px;
+  padding-right: 60px;
+  vertical-align: middle;
 }
 
 .dark-version .chatMessageInput {
   background: var(--darkRightBgColor);
-  color: var(--darkColorPost);
+  color: var(--darkMainColor);
 }
 
 .chatMessageInput:focus {
@@ -112,10 +116,11 @@
   cursor: pointer;
   color: blue;
   transition: 1s;
+  background-color: var(--lightBgListItemColor);
 }
 
 .dark-version .chatSubmitButton {
-  background-color: var(--darkBorderShadow);
+  background-color: var(--darkRightBgColor);
 }
 
 .dark-version .chatSubmitButton:hover {
@@ -177,12 +182,24 @@
   align-items: center;
 }
 
-.chatSubmitButtonIcon, .emojiButtonIcon {
+.mediaButton {
+  position: absolute;
+  left: 5px;
+  background: none;
+  border: none;
+  font-size: 30px !important;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mediaButton, .chatSubmitButtonIcon, .emojiButtonIcon {
   color: var(--lightMainColor);
   font-size: 35px !important;
   cursor: pointer;
 }
 
-.dark-version .chatSubmitButtonIcon, .dark-version .emojiButtonIcon {
+.dark-version .mediaButton, .dark-version .chatSubmitButtonIcon, .dark-version .emojiButtonIcon {
   color: var(--darkMainColor);
 }

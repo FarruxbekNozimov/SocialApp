@@ -15,7 +15,6 @@
   object-fit: cover;
   margin-right: 15px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
 }
 
 .messageImg.own {
@@ -23,16 +22,30 @@
 }
 
 .messageText {
-  padding: 15px;
-  border-radius: 15px;
   background-color: #1877f2;
-  color: white;
+  padding: 15px 10px 10px 10px;
   max-width: 300px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  -webkit-box-shadow: 1px 5px 30px -13px rgba(105, 107, 255, 0.61);
-  -moz-box-shadow: 1px 5px 30px -13px rgba(105, 107, 255, 0.61);
   box-shadow: 1px 5px 30px -13px rgba(105, 107, 255, 0.61);
+  border-radius: 5px 20px 20px;
+  background: var(--darkMainColor);
+  color: var(--lightMainColor);
 }
+
+.own .messageText {
+  border-radius: 20px 5px 20px 20px;
+}
+
+.dark-version .messageText {
+  background: var(--darkRightBgColor);
+  color: var(--darkColorPost);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark-version .own .messageText {
+  background: transparent;
+}
+
 
 .messageBottom {
   margin-top: 5px;
@@ -41,15 +54,24 @@
   text-align: end;
 }
 
-.messageBottom.own {
-  text-align: start;
+.dark-version .messageBottom {
+  color: var(--lightBgListItemColor);
 }
 
+.messageBottom.own {
+  text-align: start;
+  color: var(--lightBgListItemColor);
+}
+
+.message.own .messageBottom.own {
+  color: var(--darkBgListItemColor);
+}
 
 .message.own {
   align-items: flex-end;
 }
 
 .message.own .messageText {
-  background-color: rgb(79, 173, 202);
+  background-color: var(--darkMainColor);
+  color: var(--darkRightBgColor);
 }

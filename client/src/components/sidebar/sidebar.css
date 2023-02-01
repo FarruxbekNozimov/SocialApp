@@ -137,9 +137,11 @@
   .sidebar {
     width: 100px;
   }
-  .sidebarListItem{
+
+  .sidebarListItem {
     border-radius: 50%;
   }
+
   .sidebarListItemText {
     display: none;
   }

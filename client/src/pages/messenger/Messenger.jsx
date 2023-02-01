@@ -5,6 +5,7 @@ import {
 	SendRounded,
 	Search,
 	SentimentSatisfiedRounded,
+	AttachFileRounded,
 } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -117,13 +118,16 @@ export default function Messenger() {
 											<div ref={scrollRef}>
 												<Message
 													message={m}
+													unique={m._id}
 													own={m.sender == user._id}></Message>
 											</div>
 										))}
 									</div>
 									<div className="chatBoxBottom">
+										<AttachFileRounded className="mediaButton">
+											<SentimentSatisfiedRounded className="mediaButtonIcon"></SentimentSatisfiedRounded>
+										</AttachFileRounded>
 										<textarea
-											// onKeyDown={handleSubmit}
 											className="chatMessageInput"
 											name="Bu yerga yozing..."
 											value={newMessage}

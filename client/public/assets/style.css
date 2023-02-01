@@ -17,6 +17,7 @@
   --lightBgListItemColor: #a3e8ff;
   --darkColorPost: #ccc;
   --darkRightBgColor: #222;
+  --lightModeBgGradient:linear-gradient(to top, #fddb92 0%, #d1fdff 100%)
 }
 
 

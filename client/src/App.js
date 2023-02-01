@@ -12,12 +12,14 @@ import Profile from "./pages/profile/Profile";
 import { AuthContext } from "./context/AuthContext";
 import Messenger from "./pages/messenger/Messenger";
 import Explore from "./pages/explore/Explore";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
 	const { user } = useContext(AuthContext);
 	return (
 		<Router>
 			<Switch>
+				{!user && <Login />}
 				<Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
 				<Route path="/register">
 					{user ? <Redirect to="/" /> : <Register />}
@@ -33,6 +35,9 @@ function App() {
 				</Route>
 				<Route exact path="/profile/:username">
 					{user ? <Profile /> : <Login />}
+				</Route>
+				<Route>
+					<NotFound />
 				</Route>
 			</Switch>
 		</Router>

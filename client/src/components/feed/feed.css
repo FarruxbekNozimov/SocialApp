@@ -9,6 +9,10 @@
   overflow-y: auto;
 }
 
+.feedWrapper::-webkit-scrollbar {
+  width: 0;
+}
+
 .noPosts {
   text-align: center;
   color: #777;
