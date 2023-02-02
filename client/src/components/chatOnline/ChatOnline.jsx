@@ -38,7 +38,9 @@ export default function ChatOnline({ onlineUsers, conversation, currentUser }) {
 			</div>
 			<div className="chatOnlineName">
 				{user?.username}
-				<span className="conversationDescMessage">{user?.desc || "Hello World !!!"}</span>
+				<span className="conversationDescMessage">
+					{user?.desc || "Hello World !!!"}
+				</span>
 			</div>
 		</div>
 	);

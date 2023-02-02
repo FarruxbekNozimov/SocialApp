@@ -3,7 +3,6 @@
   user-select: none;
 }
 
-
 .emojiButton {
   position: absolute;
   right: 17%;
@@ -21,7 +20,7 @@
 
 .emojisAllContainer {
   position: absolute;
-  width: 368px;
+  width: 370px;
   height: 430px;
   top: -445px;
   right: -80px;
@@ -29,6 +28,7 @@
   background: var(--lightListOutlineColor);
   color: var(--lightBgListItemColor);
   border: 3px solid var(--darkMainColor);
+  border-right: none;
   -prefix-animation: slide 1s ease 3.5s forwards;
   animation: fadeIn 1s;
 }
@@ -79,8 +79,7 @@
 }
 
 .tabContents::-webkit-scrollbar {
-  width: 0px;
-  background: #000;
+  width: 4px;
 }
 
 .tabContentItem {

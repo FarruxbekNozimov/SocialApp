@@ -57,7 +57,8 @@
   background: none;
   transition: 0.5s;
 }
-.reactIconShow:hover{
+
+.reactIconShow:hover {
   transform: scale(1.3);
 }
 

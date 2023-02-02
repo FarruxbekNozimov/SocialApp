@@ -28,11 +28,13 @@ io.on("connection", (socket) => {
 	});
 
 	// SEND AND GET MESSAGE
-	socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+	socket.on("sendMessage", ({ senderId, receiverId, text, img, gif }) => {
 		const user = getUser(receiverId);
 		io.to(user?.socketId).emit("getMessage", {
 			senderId,
 			text,
+			img,
+			gif,
 		});
 	});
 

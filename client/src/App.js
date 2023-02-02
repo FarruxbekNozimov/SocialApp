@@ -19,11 +19,11 @@ function App() {
 	return (
 		<Router>
 			<Switch>
-				{!user && <Login />}
 				<Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
 				<Route path="/register">
 					{user ? <Redirect to="/" /> : <Register />}
 				</Route>
+				{!user && <Login />}
 				<Route exact path="/">
 					{user ? <Home /> : <Login />}
 				</Route>

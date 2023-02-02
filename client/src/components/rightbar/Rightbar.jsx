@@ -11,11 +11,24 @@ export default function Rightbar({ user }) {
 	const [friends, setFriends] = useState([]);
 	const [followers, setFollowers] = useState([]);
 	const { user: currentUser, dispatch } = useContext(AuthContext);
+	const [allUsers, setAllUsers] = useState([]);
 	// const [followed, setFollowed] = useState(
 	// 	currentUser.followings.includes(user?._id)
 	// );
 	let followed = currentUser.followings.includes(user?._id);
-	console.log(currentUser.followings, user?._id, user, currentUser);
+
+	useEffect(() => {
+		const getAllUsers = async () => {
+			try {
+				const Users = await axios.get("/users/usersAll");
+				let usersWithOutMe = Users.data.filter((u) => u._id != currentUser._id);
+				setAllUsers(usersWithOutMe);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getAllUsers();
+	}, [allUsers]);
 
 	useEffect(() => {
 		const getFriends = async () => {
@@ -32,7 +45,6 @@ export default function Rightbar({ user }) {
 	}, [user, followers, friends]);
 
 	const handleClick = async () => {
-		console.log(followed, currentUser.followings, currentUser._id);
 		try {
 			if (followed) {
 				await axios.put(`/users/${user._id}/unfollow`, {
@@ -46,12 +58,10 @@ export default function Rightbar({ user }) {
 				dispatch({ type: "FOLLOW", payload: user._id });
 			}
 			followed = !followed;
-			console.log(followed);
 		} catch (err) {
 			console.log(err);
 		}
 		try {
-			console.log(user.followers, user.followings, currentUser._id);
 			if (
 				user.followers.includes(currentUser._id) &&
 				user.followings.includes(currentUser._id)
@@ -60,7 +70,6 @@ export default function Rightbar({ user }) {
 					senderId: currentUser._id,
 					receiverId: user._id,
 				});
-				console.log(result);
 			}
 		} catch (error) {}
 	};
@@ -68,22 +77,17 @@ export default function Rightbar({ user }) {
 		return (
 			<div>
 				<div className="birthdayContainer">
-					<h4 className="rightbarTitle">Online Friends</h4>
+					<h4 className="rightbarTitle">Sizga taklif qilinadi</h4>
 					<ul className="rightbarFriendList">
-						{Users.map((u) => (
+						{allUsers.map((u) => (
 							<>
-								<Online key={u.id} user={u}></Online>
+								{u.id != currentUser._id && (
+									<Online key={u.id} user={u}></Online>
+								)}
 							</>
 						))}
 					</ul>
 				</div>
-				{/* <h4>Taklif qilinadi... </h4>
-				<hr className="sidebarHr" />
-				<ul className="sidebarFriendList">
-					{Users.map((u) => (
-						<CloseFriend key={u.id} user={u}></CloseFriend>
-					))}
-				</ul> */}
 			</div>
 		);
 	};

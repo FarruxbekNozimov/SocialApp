@@ -194,12 +194,44 @@
   cursor: pointer;
 }
 
-.mediaButton, .chatSubmitButtonIcon, .emojiButtonIcon {
+.mediaButtonIcon, .chatSubmitButtonIcon, .emojiButtonIcon {
   color: var(--lightMainColor);
   font-size: 35px !important;
   cursor: pointer;
 }
 
-.dark-version .mediaButton, .dark-version .chatSubmitButtonIcon, .dark-version .emojiButtonIcon {
+.dark-version .mediaButtonIcon, .dark-version .chatSubmitButtonIcon, .dark-version .emojiButtonIcon {
   color: var(--darkMainColor);
+}
+
+.shareImgContainer {
+  width: 100%;
+  padding: 0 20px 10px 20px;
+  position: absolute;
+  top: -330px;
+  height: 320px;
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(34, 34, 34, 0.6);
+  border: 1px solid var(--darkMainColor);
+  display: flex;
+  justify-content: center;
+}
+
+.shareImg {
+  width: 95%;
+  height: 95%;
+  object-fit: contain;
+  border-radius: 20px;
+  background: #000;
+}
+
+.shareCancelImg {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 30px !important;
+  color: #fff;
 }

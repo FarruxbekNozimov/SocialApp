@@ -54,3 +54,7 @@
   display: block;
   color: #999;
 }
+
+.usersLink {
+  text-decoration: none;
+}

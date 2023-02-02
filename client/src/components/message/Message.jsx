@@ -10,7 +10,20 @@ export default function Message({ unique, message, own }) {
 				{own ? (
 					<>
 						<p className="messageText" id={unique}>
-							{message.text}
+							{(message.img || message.gif) && (
+								<div className="gifContainer">
+									<img
+										src={message.img || message.gif}
+										alt=""
+										className="messageChatImg"
+									/>
+									<span className="gifIndicator">
+										{message.gif && "GIF"}
+										{message.img && "IMG"}
+									</span>
+								</div>
+							)}
+							<span className="msgText">{message.text}</span>
 							<div className="messageBottom own">
 								{moment(message.createdAt).format("HH:mm")}
 								<BottomReaction target={unique} chat></BottomReaction>
@@ -30,7 +43,20 @@ export default function Message({ unique, message, own }) {
 							alt=""
 						/>
 						<p className="messageText" id={unique}>
-							{message.text}
+							{(message.img || message.gif) && (
+								<div className="gifContainer">
+									<img
+										src={message.img || message.gif}
+										alt=""
+										className="messageChatImg"
+									/>
+									<span className="gifIndicator">
+										{message.gif && "GIF"}
+										{message.img && "IMG"}
+									</span>
+								</div>
+							)}
+							<span className="msgText">{message.text}</span>
 							<div className="messageBottom">
 								{moment(message.createdAt).format("HH:mm")}
 							</div>

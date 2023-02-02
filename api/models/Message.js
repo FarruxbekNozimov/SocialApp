@@ -11,9 +11,17 @@ const MessageSchema = new mongoose.Schema(
 		text: {
 			type: String,
 		},
-		isImg: {
-			type: Boolean,
-			default: false,
+		img: {
+			type: String,
+		},
+		gif: {
+			type: String,
+		},
+		audio: {
+			type: String,
+		},
+		video: {
+			type: String,
 		},
 		replyTo: {
 			type: String,

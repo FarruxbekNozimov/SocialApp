@@ -15,12 +15,10 @@ export default function Share() {
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		console.log("Clicked");
 		const newPost = {
 			userId: user._id,
 			desc: desc.current.value,
 		};
-		console.log(file);
 		if (file) {
 			const data = new FormData();
 			data.append("file", file);

@@ -4,16 +4,22 @@ import { useEffect, useState } from "react";
 import "./emojis.css";
 import fetchGifs from "fetch-gifs";
 
-export default function Emojis({ target }) {
+export default function Emojis({ setChangedGif, setChangedStiker, target }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const [emojisAll, setEmojisAll] = useState([]);
 	const [gifsAll, setGifsAll] = useState([]);
 	const [searchInput, setSearchInut] = useState("hello");
-	let stikerLenght = 20;
+	const [emojis, setEmojis] = useState([]);
+	const [file, setFile] = useState(null);
+	let stikerLenght = 25;
 	let stikers = [];
+
 	for (let i = 0; i < stikerLenght; i++) {
 		stikers.push(PF + "/stikers/" + i + ".png");
 	}
+	// target &&
+	// 	target.addEventListener("input", (e) => {
+	// 		console.log(e);
+	// 	});
 
 	function openTabs(evt, tabId) {
 		let tabcontent = document.getElementsByClassName("tabContentItem");
@@ -26,10 +32,23 @@ export default function Emojis({ target }) {
 		document.getElementById(tabId).classList.remove("d-none");
 	}
 
-	let emojis = emoji.emoji;
 	const handleSearch = (e) => {
 		setSearchInut(e.target.value);
 	};
+	useEffect(() => {
+		if (!searchInput || searchInput == "hello") {
+			setEmojis(emoji.emoji);
+		} else {
+			let emojilar = [];
+			for (let i in emoji.emoji) {
+				if (i.includes(searchInput)) {
+					emojilar.push(emoji.emoji[i]);
+				}
+			}
+			setEmojis(emojilar);
+		}
+	}, [searchInput]);
+
 	useEffect(() => {
 		const getGifs = async () => {
 			try {
@@ -40,6 +59,10 @@ export default function Emojis({ target }) {
 		};
 		getGifs();
 	}, [searchInput]);
+	const emojiToInput = (e) => {
+		target.value += e.target.innerHTML;
+		target.focus();
+	};
 
 	return (
 		<div className="emojis">
@@ -73,7 +96,10 @@ export default function Emojis({ target }) {
 					<div id="emoji" className="tabContentItem active">
 						{emojis &&
 							Object.keys(emojis).map((value, index) => (
-								<button className="emojiItem" key={index}>
+								<button
+									onClick={(e) => emojiToInput(e)}
+									className="emojiItem"
+									key={index}>
 									{emojis[value]}
 								</button>
 							))}
@@ -84,7 +110,8 @@ export default function Emojis({ target }) {
 								draggable="false"
 								src={gifsAll[i]}
 								className="gifsItem"
-								key={i}></img>
+								key={i}
+								onClick={(e) => setChangedGif(e.target.src)}></img>
 						))}
 					</div>
 					<div id="stikers" className="tabContentItem d-none">
@@ -93,7 +120,8 @@ export default function Emojis({ target }) {
 								draggable="false"
 								src={value}
 								className="gifsItem"
-								key={i}></img>
+								key={i}
+								onClick={(e) => setChangedStiker(e.target.src)}></img>
 						))}
 					</div>
 				</div>

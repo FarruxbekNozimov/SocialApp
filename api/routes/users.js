@@ -46,13 +46,23 @@ router.delete("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
 	const userId = req.query.userId;
 	const username = req.query.username;
-	console.log(userId, username);
 	try {
 		const user = userId
 			? await User.findById(userId)
 			: await User.findOne({ username: username });
 		const { password, updatedAt, ...other } = user._doc;
 		res.status(200).json(other);
+	} catch (error) {
+		res.status(500).json(err).json(err);
+	}
+});
+
+// -- GET ALLUSER
+
+router.get("/usersAll", async (req, res) => {
+	try {
+		const users = await User.find();
+		res.status(200).json(users);
 	} catch (error) {
 		res.status(500).json(err).json(err);
 	}
@@ -119,7 +129,6 @@ router.put("/:id/follow", async (req, res) => {
 // -- UNFOLLOW USER
 
 router.put("/:id/unfollow", async (req, res) => {
-	console.log(req.body.userId, req.params.id);
 	if (req.body.userId != req.params.id) {
 		try {
 			const user = await User.findById(req.params.id);

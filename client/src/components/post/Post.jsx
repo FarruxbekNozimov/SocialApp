@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { MoreVert } from "@mui/icons-material";
 import WatchLaterRoundedIcon from "@mui/icons-material/WatchLaterRounded";
 import BottomReaction from "../bottomReaction/BottomReaction";
+import { ChatBubbleOutlineRounded } from "@mui/icons-material";
 
 export default function Post({ post }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -73,8 +74,8 @@ export default function Post({ post }) {
 				<div className="postBottom">
 					<BottomReaction target={post._id}></BottomReaction>
 					<div className="postBottomRight">
-						<span className="postCommentText">111{post.comments} comments</span>
-					</div>
+						<span className="postCommentText">0 comments</span>
+					</div>	
 				</div>
 			</div>
 		</div>

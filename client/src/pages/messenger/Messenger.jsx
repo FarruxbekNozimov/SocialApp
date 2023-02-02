@@ -6,6 +6,7 @@ import {
 	Search,
 	SentimentSatisfiedRounded,
 	AttachFileRounded,
+	Cancel,
 } from "@mui/icons-material";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -26,6 +27,9 @@ export default function Messenger() {
 	const socket = useRef();
 	const { user } = useContext(AuthContext);
 	const scrollRef = useRef();
+	const [file, setFile] = useState(null);
+	const [changedGif, setChangedGif] = useState(null);
+	const [changedStiker, setChangedStiker] = useState(null);
 
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
@@ -42,7 +46,6 @@ export default function Messenger() {
 		arrivalMessage &&
 			currentChat?.members.includes(arrivalMessage.sender) &&
 			setMessages((prev) => [...prev, arrivalMessage]);
-		console.log(arrivalMessage);
 	}, [arrivalMessage, currentChat]);
 
 	useEffect(() => {
@@ -76,25 +79,61 @@ export default function Messenger() {
 		getMessages();
 	}, [currentChat]);
 
+	useEffect(() => {
+		handleSubmit();
+	}, [changedStiker]);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (newMessage.trim()) {
+		if (newMessage.trim() || file || changedGif) {
 			const message = {
 				sender: user._id,
 				text: newMessage.trim(),
 				conversationId: currentChat._id,
 			};
 			const receiverId = currentChat.members.find((m) => m != user._id);
+			if (file) {
+				const data = new FormData();
+				data.append("file", file);
+				try {
+					const result = await axios.post("/upload", data);
+					message.img = result.data;
+				} catch (err) {
+					console.log(err);
+				}
+			}
+			if (changedGif) {
+				try {
+					console.log(changedGif);
+					message.gif = changedGif;
+				} catch (err) {
+					console.log(err);
+				}
+			}
+			if (changedStiker) {
+				const data = new FormData();
+				data.append("stiker", file);
+				try {
+					const result = await axios.post("/upload", data);
+					message.img = result.data;
+				} catch (err) {
+					console.log(err);
+				}
+			}
 			socket.current.emit("sendMessage", {
 				senderId: user._id,
-				receiverId,
+				receiverId: receiverId,
 				text: newMessage,
+				img: message.img,
+				gif: message.gif,
 			});
-
 			try {
 				const res = await axios.post("/messages", message);
 				setMessages([...messages, res.data]);
 				setNewMessage("");
+				setFile(null);
+				setChangedGif(null);
+				setChangedStiker(null);
 			} catch (err) {
 				console.log(err);
 			}
@@ -125,9 +164,42 @@ export default function Messenger() {
 										))}
 									</div>
 									<div className="chatBoxBottom">
-										<AttachFileRounded className="mediaButton">
-											<SentimentSatisfiedRounded className="mediaButtonIcon"></SentimentSatisfiedRounded>
-										</AttachFileRounded>
+										{file && (
+											<div className="shareImgContainer">
+												<img
+													className="shareImg"
+													src={URL.createObjectURL(file)}
+													alt="Image"
+												/>
+												<Cancel
+													className="shareCancelImg"
+													onClick={() => setFile(null)}></Cancel>
+											</div>
+										)}
+										{changedGif && (
+											<div className="shareImgContainer">
+												<img
+													className="shareImg"
+													src={changedGif}
+													alt="Image"
+												/>
+												<Cancel
+													className="shareCancelImg"
+													onClick={() => setChangedGif(null)}></Cancel>
+											</div>
+										)}
+										<label htmlFor="mediaChat" className="mediaButton">
+											<AttachFileRounded className="mediaButtonIcon"></AttachFileRounded>
+											<img src={file} alt="" />
+											<input
+												type="file"
+												name="mediaChat"
+												id="mediaChat"
+												style={{ display: "none" }}
+												accept=".png,.gif,.jpg,.jpeg"
+												onChange={(e) => setFile(e.target.files[0])}
+											/>
+										</label>
 										<textarea
 											className="chatMessageInput"
 											name="Bu yerga yozing..."
@@ -137,6 +209,8 @@ export default function Messenger() {
 											id="textAreaChat"></textarea>
 										<div className="emojisButtonContainer">
 											<Emojis
+												setChangedGif={setChangedGif}
+												setChangedStiker={setChangedStiker}
 												target={document.getElementById(
 													"textAreaChat"
 												)}></Emojis>

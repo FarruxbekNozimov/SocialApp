@@ -9,7 +9,10 @@ router.post("/", async (req, res) => {
 	const { senderId, receiverId } = req.body;
 	let conversations = await Conversation.find();
 	for (let c in conversations) {
-		if (c.members.includes(senderId) && c.members.includes(receiverId))
+		if (
+			conversations[c].members.includes(senderId) &&
+			conversations[c].members.includes(receiverId)
+		)
 			return res.status(400).json("This conversation is already exists");
 	}
 	const newConversation = new Conversation({
