@@ -10,7 +10,7 @@ export default function Emojis({ setChangedGif, setChangedStiker, target }) {
 	const [searchInput, setSearchInut] = useState("hello");
 	const [emojis, setEmojis] = useState([]);
 	const [file, setFile] = useState(null);
-	let stikerLenght = 25;
+	let stikerLenght = 5;
 	let stikers = [];
 
 	for (let i = 0; i < stikerLenght; i++) {

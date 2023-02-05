@@ -20,7 +20,6 @@
 		"react-router-dom": "^5.3.4",
 		"react-scripts": "5.0.1",
 		"socket.io-client": "^4.5.4",
-		"timeago.js": "^4.0.2",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
@@ -47,5 +46,5 @@
 			"last 1 safari version"
 		]
 	},
-	"proxy": "http://localhost:7770/api"
+	"proxy": "https://yuzkitobapi.onrender.com/api/"
 }

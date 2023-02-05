@@ -16,7 +16,16 @@ export default function BottomReaction({ target, chat }) {
 		}
 	}, [msg]);
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const reactions = ["drink", "cake", "like", "vomit", "angry", "cry", "heart"];
+	const reactions = [
+		"drink",
+		"heart-eye",
+		"cake",
+		"like",
+		"vomit",
+		"angry",
+		"cry",
+		"heart",
+	];
 	const showChangedReaction = (e) => {
 		// if (chat) {
 		let id = e.target.id.slice(0, -2);

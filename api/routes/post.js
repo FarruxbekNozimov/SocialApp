@@ -1,12 +1,10 @@
 const router = require("express").Router();
-const shuffleArray = require("../utils/shuffle");
 const Post = require("../models/Post");
 const User = require("../models/User");
 
 // PLAN
 
 // -- CREATE POST
-
 router.post("/", async (req, res) => {
 	const newPost = await new Post(req.body);
 	try {
@@ -18,7 +16,6 @@ router.post("/", async (req, res) => {
 });
 
 // -- UPDATE POST
-
 router.put("/:id", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
@@ -34,7 +31,6 @@ router.put("/:id", async (req, res) => {
 });
 
 // -- DELETE POST
-
 router.delete("/:id", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
@@ -50,7 +46,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 // -- LIKE / DISLIKE POST
-
 router.put("/:id/like", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
@@ -67,7 +62,6 @@ router.put("/:id/like", async (req, res) => {
 });
 
 // -- GET TIMELINE POSTS
-
 router.get("/timeline/:id", async (req, res) => {
 	try {
 		const currentUser = await User.findById(req.params.id);
@@ -77,14 +71,13 @@ router.get("/timeline/:id", async (req, res) => {
 				return Post.find({ userId: friendId });
 			})
 		);
-		res.status(200).json(shuffleArray(userPosts.concat(...friendPosts)));
+		res.status(200).json(userPosts.concat(...friendPosts));
 	} catch (error) {
 		res.status(500).json(error);
 	}
 });
 
 // -- GET USERS POSTS IN TIMELINE
-
 router.get("/profile/:username", async (req, res) => {
 	try {
 		const user = await User.findOne({ username: req.params.username });
@@ -96,8 +89,8 @@ router.get("/profile/:username", async (req, res) => {
 });
 
 // -- GET POSTS
-
 router.get("/postsAll", async (req, res) => {
+	console.log("salom");
 	try {
 		const post = await Post.find();
 		res.status(200).json(post);
@@ -107,7 +100,6 @@ router.get("/postsAll", async (req, res) => {
 });
 
 // -- GET POST
-
 router.get("/:id", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
