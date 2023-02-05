@@ -17,7 +17,12 @@ const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-app.use(cors());
+app.use(
+	cors({
+		origin: "https://yuzkitob.onrender.com/",
+		credentials: true,
+	})
+);
 dotenv.config();
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
