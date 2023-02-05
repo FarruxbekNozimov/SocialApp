@@ -9,6 +9,7 @@ import {
 	DarkModeRounded,
 	LightModeRounded,
 	FontDownloadRounded,
+	ExitToApp,
 } from "@mui/icons-material";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -18,6 +19,9 @@ export default function Sidebar() {
 	let theme = localStorage.getItem("theme") || "dark-version";
 	const { user } = useContext(AuthContext);
 
+	const clearAll = () => {
+		localStorage.removeItem("user");
+	};
 	const changeTheme = () => {
 		if (theme == "dark-version") {
 			localStorage.setItem("theme", "light-version");
@@ -81,6 +85,12 @@ export default function Sidebar() {
 									<span className="sidebarListItemText">Dark</span>
 								</>
 							)}
+						</li>
+					</a>
+					<a onClick={changeTheme} className="sidebarLink">
+						<li className="sidebarListItem exitApp" onClick={clearAll}>
+							<ExitToApp className="sidebarIcon"></ExitToApp>
+							<span className="sidebarListItemText">Chiqish</span>
 						</li>
 					</a>
 				</ul>

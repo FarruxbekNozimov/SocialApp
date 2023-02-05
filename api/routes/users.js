@@ -17,7 +17,7 @@ router.put("/:id", async (req, res) => {
 		try {
 			const user = await User.findByIdAndDelete(id, req.body);
 			res.status(200).json("Account has been updated");
-		} catch (error) {
+		} catch (err) {
 			return res.status(500).json(err);
 		}
 	} else {
@@ -33,7 +33,7 @@ router.delete("/:id", async (req, res) => {
 		try {
 			const user = await User.findByIdAndDelete(id);
 			res.status(200).json("Account has been Deleted");
-		} catch (error) {
+		} catch (err) {
 			return res.status(500).json(err);
 		}
 	} else {
@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
 			: await User.findOne({ username: username });
 		const { password, updatedAt, ...other } = user._doc;
 		res.status(200).json(other);
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json(err).json(err);
 	}
 });
@@ -63,7 +63,7 @@ router.get("/usersAll", async (req, res) => {
 	try {
 		const users = await User.find();
 		res.status(200).json(users);
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json(err).json(err);
 	}
 });

@@ -118,7 +118,7 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .rightbar{
-    flex:2;
+  .rightbar {
+    flex: 2;
   }
 }

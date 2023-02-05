@@ -59,7 +59,7 @@ export default function Login() {
 							minLength="6"
 						/>
 						<button className="loginButton" type="submit">
-							Ro'yxatdan o'tish{" "}
+							Ro'yxatdan o'tish
 						</button>
 						<hr className="loginHr" />
 						<Link to="/login">

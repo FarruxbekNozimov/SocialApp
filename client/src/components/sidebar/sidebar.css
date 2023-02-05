@@ -133,6 +133,13 @@
   outline: none;
 }
 
+.exitApp {
+  box-shadow: 2px 2px 10px 1px var(--lightBorderShadow);
+  background: var(--lightBgListItemColor);
+  outline: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+
 @media only screen and (max-width: 900px) {
   .sidebar {
     width: 100px;

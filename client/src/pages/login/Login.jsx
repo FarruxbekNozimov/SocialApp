@@ -10,20 +10,17 @@ export default function Login() {
 	const password = useRef();
 
 	const { user, isFetching, error, dispatch } = useContext(AuthContext);
-	console.log(error);
 	const handleClick = (e) => {
 		e.preventDefault();
 		loginCall(
 			{ email: email.current.value, password: password.current.value },
 			dispatch
 		);
-		console.log(user, isFetching, error);
 		if (error) {
 			console.log(error);
 			return;
 		}
 	};
-	console.log(user);
 
 	return (
 		<div className="login">

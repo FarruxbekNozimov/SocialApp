@@ -15,26 +15,28 @@ export default function Share() {
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		const newPost = {
-			userId: user._id,
-			desc: desc.current.value,
-		};
-		if (file) {
-			const data = new FormData();
-			data.append("file", file);
+		if (file || desc.current.value) {
+			const newPost = {
+				userId: user._id,
+				desc: desc.current.value,
+			};
+			if (file) {
+				const data = new FormData();
+				data.append("file", file);
+				try {
+					const result = await axios.post("/upload", data);
+					newPost.img = result.data;
+				} catch (err) {
+					console.log(err);
+				}
+			}
+
 			try {
-				const result = await axios.post("/upload", data);
-				newPost.img = result.data;
+				await axios.post("/posts", newPost);
+				window.location.reload();
 			} catch (err) {
 				console.log(err);
 			}
-		}
-
-		try {
-			await axios.post("/posts", newPost);
-			window.location.reload();
-		} catch (err) {
-			console.log(err);
 		}
 	};
 	return (

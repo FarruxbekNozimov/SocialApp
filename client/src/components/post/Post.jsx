@@ -75,7 +75,7 @@ export default function Post({ post }) {
 					<BottomReaction target={post._id}></BottomReaction>
 					<div className="postBottomRight">
 						<span className="postCommentText">0 comments</span>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
