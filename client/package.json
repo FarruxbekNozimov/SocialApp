@@ -46,5 +46,5 @@
 			"last 1 safari version"
 		]
 	},
-	"proxy": "https://yuzkitobapi.onrender.com/api/"
+	"proxy": "http://localhost:7770/api/"
 }

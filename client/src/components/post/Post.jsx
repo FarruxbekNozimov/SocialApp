@@ -4,9 +4,14 @@ import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { MoreVert } from "@mui/icons-material";
+import {
+	MoreVert,
+	DeleteOutlineRounded,
+	EditRounded,
+} from "@mui/icons-material";
 import WatchLaterRoundedIcon from "@mui/icons-material/WatchLaterRounded";
 import BottomReaction from "../bottomReaction/BottomReaction";
+import Message from "../message/Message";
 // import { ChatBubbleOutlineRounded } from "@mui/icons-material";
 
 export default function Post({ post }) {
@@ -56,7 +61,7 @@ export default function Post({ post }) {
 						</Link>
 						<span className="postUsername">
 							{user.username}
-							<br />{" "}
+							<br />
 							<span className="postDate">
 								<WatchLaterRoundedIcon className="postDateIcon"></WatchLaterRoundedIcon>
 								{moment(post.createdAt).format("HH:mm")}
@@ -64,7 +69,17 @@ export default function Post({ post }) {
 						</span>
 					</div>
 					<div className="postTopRight">
-						<MoreVert className=""></MoreVert>
+						<MoreVert className="moreIcon"></MoreVert>
+						<div className="postMoreContainer">
+							<span className="postMoreItem">
+								<EditRounded className="postMoreIcons"></EditRounded>
+								Update
+							</span>
+							<span className="postMoreItem">
+								<DeleteOutlineRounded className="postMoreIcons"></DeleteOutlineRounded>
+								Delete
+							</span>
+						</div>
 					</div>
 				</div>
 				<div className="postCenter">
@@ -72,9 +87,51 @@ export default function Post({ post }) {
 					<img className="postImg" src={post?.img} alt="" />
 				</div>
 				<div className="postBottom">
-					<BottomReaction target={post._id}></BottomReaction>
+					<BottomReaction post={post} target={post._id}></BottomReaction>
 					<div className="postBottomRight">
 						<span className="postCommentText">0 comments</span>
+					</div>
+				</div>
+				<div className="postCommentsContainer">
+					<div className="postCommentItem">
+						<img
+							className="postCommentAvatar"
+							src={
+								user.profilePicture
+									? user.profilePicture
+									: PF + "person/user.png"
+							}
+						/>
+						<span className="postCommentTextCont">
+							<span className="postCommentTitle">FarruxDEV</span>
+							<span className="postCmmmentText">Hello, How are you ?</span>
+							<span className="postCommentDate">12:00</span>
+						</span>
+					</div>
+					<div className="postCommentItem">
+						<img
+							className="postCommentAvatar"
+							src={
+								user.profilePicture
+									? user.profilePicture
+									: PF + "person/user.png"
+							}
+						/>
+						<span className="postCommentTextCont">
+							<span className="postCommentTitle">FarruxDEV</span>
+							<span className="postCmmmentText">Hello, How are you ?</span>
+							<span className="postCommentDate">12:00</span>
+						</span>
+					</div>
+					<div className="postCommentSenderCont">
+						<input
+							autoComplete="off"
+							name="comment"
+							type="text"
+							className="postCommentSendInput"
+							placeholder="Comment here... "
+						/>
+						<button className="postCommentSendButton">💭</button>
 					</div>
 				</div>
 			</div>

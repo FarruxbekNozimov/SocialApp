@@ -10,29 +10,37 @@
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottomReactionButton {
-  display: none;
+  display: flex;
   transition: visibility 0s, opacity 1s linear;
+  align-items: center;
   margin-top: 5px;
   margin-right: 5px;
-  align-items: center;
   padding: 2px 5px;
   border-radius: 50px;
   cursor: pointer;
   padding-right: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  color: black;
+  background: rgba(51, 255, 0, 0.8);
+}
+
+.dark-version .bottomReactionButton {
   border: 1px solid white;
-  color: var(--darkColorPost);
-  background: rgba(0, 4, 66, 0.795);
+  color: white;
+  background: rgba(0, 0, 255, 0.3);
 }
 
 .selectedReaction {
-  background: rgb(0, 17, 255) !important;
+  background: rgba(51, 255, 0, 0.5) !important;
 }
 
 .dark-version .selectedReaction {
-  background: rgb(0, 4, 59);
+  background: blue !important;
 }
 
 .reactIcon {

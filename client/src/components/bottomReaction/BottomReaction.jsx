@@ -1,8 +1,43 @@
 import "./bottomReaction.css";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
-export default function BottomReaction({ target, chat }) {
+export default function BottomReaction({ post, target, chat }) {
 	const [msg, setMsg] = useState(null);
+	const [reactionsPostAll, setReactionsPostAll] = useState(post?.reactions);
+	const [reactionsPost, setReactionsPost] = useState([]);
+	const { user: currentUser } = useContext(AuthContext);
+
+	let setAllReactions = () => {
+		for (let i in reactionsPostAll) {
+			if (!reactionsPost.map((r) => r[1]).includes(reactionsPostAll[i][1])) {
+				setReactionsPost([...reactionsPost, reactionsPostAll[i]]);
+			}
+		}
+	};
+
+	let handleReaction = (x) => {
+		console.log(x);
+		try {
+			const getReaction = async () => {
+				let updateReactions = await axios.put(`/posts/${post._id}/reaction`, {
+					userId: currentUser._id,
+					reaction: x,
+				});
+				console.log(updateReactions);
+				setReactionsPostAll(updateReactions.data);
+			};
+			getReaction();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	useEffect(() => {
+		setAllReactions();
+	}, [reactionsPost, reactionsPostAll, post]);
+
 	useEffect(() => {
 		setMsg(document.getElementById(target));
 		if (msg) {
@@ -16,43 +51,7 @@ export default function BottomReaction({ target, chat }) {
 		}
 	}, [msg]);
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const reactions = [
-		"drink",
-		"heart-eye",
-		"cake",
-		"like",
-		"vomit",
-		"angry",
-		"cry",
-		"heart",
-	];
-	const showChangedReaction = (e) => {
-		// if (chat) {
-		let id = e.target.id.slice(0, -2);
-		let button = document.getElementById(`${id}Btn`);
-		for (let i in reactions) {
-			let reaction = button.children[i].children[0];
-			if (e.target.src == reaction.src) {
-				reaction.parentElement.style.display =
-					reaction.parentElement.style.display === "flex" ? "none" : "flex";
-			}
-		}
-		// }
-	};
-	const handleReaction = (x) => {
-		if (chat) {
-			let bottomReactionButton = document.getElementsByClassName(
-				"bottomReactionButton"
-			);
-			for (let i = 0; i < bottomReactionButton.length; i++) {
-				if (bottomReactionButton[i] != x.target) {
-					bottomReactionButton[i].style.display = "none";
-				} else {
-					bottomReactionButton[i].style.display = "block";
-				}
-			}
-		}
-	};
+	const reactions = ["drink", "cake", "like", "vomit", "angry", "cry", "heart"];
 
 	return (
 		<>
@@ -62,17 +61,30 @@ export default function BottomReaction({ target, chat }) {
 						<img
 							id={`${target}ic`}
 							src={PF + `emojis/${r}.gif`}
-							onClick={(event) => showChangedReaction(event)}
+							onClick={() => handleReaction(r)}
 							className="reactIconShow"></img>
 					))}
 				</div>
 				<span id={`${target}Btn`} className="bottomReactionButtonsContainer">
-					{reactions.map((r) => (
-						<div className="bottomReactionButton">
-							<img src={PF + `emojis/${r}.gif`} className="reactIcon"></img>
-							<span className="postLikeCounter">1</span>
-						</div>
-					))}
+					{reactionsPost.map((r) =>
+						reactionsPostAll.filter((x) => x[1] == r[1]) != 0 ? (
+							<div
+								className={`bottomReactionButton ${
+									Object.fromEntries(reactionsPostAll)[currentUser._id] ==
+										r[1] && "selectedReaction"
+								}`}>
+								{console.log(r)}
+								<img
+									src={PF + `emojis/${r[1]}.gif`}
+									className="reactIcon"></img>
+								<span className="postLikeCounter">
+									{reactionsPostAll.filter((x) => x[1] == r[1]).length}
+								</span>
+							</div>
+						) : (
+							""
+						)
+					)}
 				</span>
 			</div>
 		</>

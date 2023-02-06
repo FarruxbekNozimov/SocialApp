@@ -1,6 +1,5 @@
 import "./message.css";
 import BottomReaction from "../bottomReaction/BottomReaction";
-import { useEffect, useRef } from "react";
 import moment from "moment";
 
 export default function Message({ unique, message, own }) {
@@ -43,22 +42,22 @@ export default function Message({ unique, message, own }) {
 							alt=""
 						/>
 						<p className="messageText" id={unique}>
-							{(message.img || message.gif) && (
+							{(message?.img || message?.gif) && (
 								<div className="gifContainer">
 									<img
-										src={message.img || message.gif}
+										src={message?.img || message?.gif}
 										alt=""
 										className="messageChatImg"
 									/>
 									<span className="gifIndicator">
-										{message.gif && "GIF"}
-										{message.img && "IMG"}
+										{message?.gif && "GIF"}
+										{message?.img && "IMG"}
 									</span>
 								</div>
 							)}
-							<span className="msgText">{message.text}</span>
+							<span className="msgText">{message?.text}</span>
 							<div className="messageBottom">
-								{moment(message.createdAt).format("HH:mm")}
+								{moment(message?.createdAt).format("HH:mm")}
 							</div>
 							<BottomReaction target={unique} chat></BottomReaction>
 						</p>

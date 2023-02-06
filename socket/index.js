@@ -1,6 +1,6 @@
 const io = require("socket.io")(8900, {
 	cors: {
-		origin: "https://yuzkitob.onrender.com/",
+		origin: "http://localhost:3000/",
 	},
 });
 

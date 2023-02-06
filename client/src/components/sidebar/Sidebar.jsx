@@ -87,7 +87,7 @@ export default function Sidebar() {
 							)}
 						</li>
 					</a>
-					<a onClick={changeTheme} className="sidebarLink">
+					<a className="sidebarLink">
 						<li className="sidebarListItem exitApp" onClick={clearAll}>
 							<ExitToApp className="sidebarIcon"></ExitToApp>
 							<span className="sidebarListItemText">Chiqish</span>

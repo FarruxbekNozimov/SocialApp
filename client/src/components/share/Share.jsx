@@ -1,17 +1,16 @@
 import "./share.css";
 import { AddAPhoto, EmojiEmotions, Cancel } from "@mui/icons-material";
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useRef } from "react";
-import { useState } from "react";
 import axios from "axios";
 
 export default function Share() {
 	const { user } = useContext(AuthContext);
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const desc = useRef();
-
 	const [file, setFile] = useState(null);
+
+	console.log(file);
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -58,15 +57,9 @@ export default function Share() {
 					/>
 				</div>
 				{file && (
-					<div className="shareImgContainer">
-						<img
-							className="shareImg"
-							src={URL.createObjectURL(file)}
-							alt="Image"
-						/>
-						<Cancel
-							className="shareCancelImg"
-							onClick={() => setFile(null)}></Cancel>
+					<div className="shareImgContainer1">
+						<img className="shareImg1" src={URL.createObjectURL(file)} alt="" />
+						<Cancel className="shareCancelImg1" onClick={() => setFile(null)} />
 					</div>
 				)}
 				<hr className="shareHr" />
@@ -87,12 +80,6 @@ export default function Share() {
 								onChange={(e) => setFile(e.target.files[0])}
 							/>
 						</label>
-						<div className="shareOption">
-							<EmojiEmotions
-								htmlColor="gold"
-								className="shareIcon"></EmojiEmotions>
-							<span className="shareOptionText">Emojilar</span>
-						</div>
 					</div>
 					<button className="shareButton" type="submit">
 						Ulashish
